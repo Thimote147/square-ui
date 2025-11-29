@@ -1,13 +1,99 @@
 version: '3.8'
 
 services:
-  square-ui:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  square-ui-home:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
     ports:
       - "3000:3000"
+    volumes:
+      - ./home:/app
     environment:
-      - NODE_ENV=production
-    restart: unless-stopped
-    container_name: square-ui-site
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-home
+
+  square-ui-calendar:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./templates/calendar:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-calendar
+
+  square-ui-chat:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./templates/chat:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-chat
+
+  square-ui-emails:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./templates/emails:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-emails
+
+  square-ui-dashboard:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3004:3000"
+    volumes:
+      - ./templates/dashboard-1:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-dashboard
+
+  square-ui-task-management:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3005:3000"
+    volumes:
+      - ./templates/task-management:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-task-management
+
+  square-ui-projects-timeline:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    ports:
+      - "3006:3000"
+    volumes:
+      - ./templates/projects-timeline:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: "no"
+    container_name: square-ui-projects-timeline
