@@ -2,6 +2,7 @@
 
 import { Users, Clipboard, Wallet, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const iconMap = {
   users: Users,
@@ -11,13 +12,18 @@ const iconMap = {
 };
 
 interface StatCardProps {
-  title: string;
+  titleKey: string;
   value: string;
   icon: keyof typeof iconMap;
 }
 
-export function StatCard({ title, value, icon }: StatCardProps) {
+export function StatCard({ titleKey, value, icon }: StatCardProps) {
   const Icon = iconMap[icon];
+  const t = useTranslations();
+
+  // Extract the translation key (e.g., "stats.totalClients" -> ["stats", "totalClients"])
+  const [namespace, key] = titleKey.split('.');
+  const title = t(`${namespace}.${key}`);
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-border bg-card p-4">

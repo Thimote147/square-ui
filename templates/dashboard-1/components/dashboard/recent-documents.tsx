@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useDashboardStore } from "@/store/dashboard-store";
+import { useTranslations } from "next-intl";
 
 const iconMap = {
   files: FileText,
@@ -21,18 +22,19 @@ const iconMap = {
 
 export function RecentDocuments() {
   const { documents } = useDashboardStore();
+  const t = useTranslations('documents');
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-border bg-card max-h-[400px] flex flex-col">
       <div className="flex items-center justify-between px-4 pt-[15px] pb-4 flex-wrap gap-2">
         <h2 className="text-[15px] font-normal text-foreground tracking-[-0.45px]">
-          Recent Documents
+          {t('title')}
         </h2>
 
         <div className="relative">
           <Search className="absolute left-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground z-10" />
           <Input
-            placeholder="Search files..."
+            placeholder={t('searchPlaceholder')}
             className="h-7 w-[140px] sm:w-[180px] md:w-[235px] pl-8 pr-2 text-sm text-muted-foreground"
           />
         </div>

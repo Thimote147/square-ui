@@ -16,7 +16,7 @@ export function DashboardContent() {
           {stats.map((stat) => (
             <StatCard
               key={stat.id}
-              title={stat.title}
+              titleKey={stat.titleKey}
               value={stat.value}
               icon={stat.icon as "users" | "clipboard" | "wallet" | "invoice"}
             />

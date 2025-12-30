@@ -18,6 +18,7 @@ import {
   Check,
   Plus,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   Sidebar,
   SidebarContent,
@@ -48,12 +49,12 @@ import {
 import { Kbd } from "@/components/ui/kbd";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { UpgradeCard } from "./upgrade-card";
 
 export function DashboardSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   const [favoritesOpen, setFavoritesOpen] = useState(true);
+  const t = useTranslations('sidebar');
 
   return (
     <Sidebar className="lg:border-r-0!" collapsible="offcanvas" {...props}>
@@ -113,7 +114,7 @@ export function DashboardSidebar({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Plus className="size-4" />
-                  <span>Add new team</span>
+                  <span>{t('addNewTeam')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -123,7 +124,7 @@ export function DashboardSidebar({
             <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground z-10" />
             <Input
               type="search"
-              placeholder="Search..."
+              placeholder={t('search')}
               className="pl-8 pr-8 h-8 text-sm text-muted-foreground placeholder:text-muted-foreground tracking-[-0.42px] bg-background"
             />
             <div className="flex items-center gap-0.5 rounded border border-border bg-sidebar px-1.5 py-0.5 shrink-0 absolute right-2 top-1/2 -translate-y-1/2">
@@ -145,13 +146,13 @@ export function DashboardSidebar({
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <Bell className="size-4" />
-                  <span>Notifications</span>
+                  <span>{t('notifications')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <Sparkles className="size-4" />
-                  <span>AI Assistant</span>
+                  <span>{t('aiAssistant')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -169,31 +170,31 @@ export function DashboardSidebar({
                   className="h-7 text-sm text-muted-foreground"
                 >
                   <LayoutDashboard className="size-4" />
-                  <span>Dashboard</span>
+                  <span>{t('dashboard')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <Calendar className="size-4" />
-                  <span>Schedule</span>
+                  <span>{t('schedule')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <Library className="size-4" />
-                  <span>Resources</span>
+                  <span>{t('resources')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <Users className="size-4" />
-                  <span>Clients</span>
+                  <span>{t('clients')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                   <LinkIcon className="size-4" />
-                  <span>Integrations</span>
+                  <span>{t('integrations')}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -206,7 +207,7 @@ export function DashboardSidebar({
           <Collapsible open={favoritesOpen} onOpenChange={setFavoritesOpen}>
             <CollapsibleTrigger asChild>
               <SidebarGroupLabel className="h-4 pb-4 pt-2 text-xs text-muted-foreground hover:text-foreground hover:bg-transparent cursor-pointer">
-                <span>Favorites</span>
+                <span>{t('favorites')}</span>
                 <ChevronDown
                   className={cn(
                     "size-3 transition-transform ml-auto",
@@ -221,19 +222,19 @@ export function DashboardSidebar({
                   <SidebarMenuItem>
                     <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                       <Folder className="size-4" />
-                      <span>Contracts</span>
+                      <span>{t('contracts')}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                       <Folder className="size-4" />
-                      <span>Content</span>
+                      <span>{t('content')}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                       <Folder className="size-4" />
-                      <span>Summaries</span>
+                      <span>{t('summaries')}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -249,25 +250,24 @@ export function DashboardSidebar({
             <SidebarMenuItem>
               <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                 <MessageSquare className="size-4" />
-                <span>Feedback</span>
+                <span>{t('feedback')}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                 <Settings className="size-4" />
-                <span>Settings</span>
+                <span>{t('settings')}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton className="h-7 text-sm text-muted-foreground">
                 <HelpCircle className="size-4" />
-                <span>Help Center</span>
+                <span>{t('helpCenter')}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </div>
 
-        <UpgradeCard />
       </SidebarFooter>
     </Sidebar>
   );

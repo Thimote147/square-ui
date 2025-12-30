@@ -20,6 +20,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useDashboardStore } from "@/store/dashboard-store";
+import { useTranslations } from "next-intl";
 
 // Couleurs exactes du design Figma
 const NEW_LEADS_COLOR_LIGHT = "#252C2C";
@@ -37,6 +38,7 @@ const GRID_COLOR_DARK = "#2A2A2A";
 export function ChartCard() {
   const { chartData } = useDashboardStore();
   const { resolvedTheme } = useTheme();
+  const t = useTranslations('chart');
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
 
@@ -48,7 +50,7 @@ export function ChartCard() {
   const gridColor = isDark ? GRID_COLOR_DARK : GRID_COLOR_LIGHT;
 
   const formatDateRange = (date: Date | undefined) => {
-    if (!date) return "November";
+    if (!date) return t('november');
     const month = date.toLocaleDateString("en-US", { month: "long" });
     return month;
   };
@@ -59,7 +61,7 @@ export function ChartCard() {
         <div className="flex items-center gap-2">
           <Users className="size-4 text-muted-foreground" />
           <h2 className="text-[15px] font-normal text-foreground tracking-[-0.45px]">
-            Leads Over Time
+            {t('title')}
           </h2>
         </div>
         <Popover open={open} onOpenChange={setOpen}>
@@ -95,7 +97,7 @@ export function ChartCard() {
             style={{ backgroundColor: newLeadsColor }}
           />
           <span className="text-xs font-medium text-muted-foreground tracking-[-0.24px]">
-            New Leads
+            {t('newLeads')}
           </span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -104,7 +106,7 @@ export function ChartCard() {
             style={{ backgroundColor: REPLIED_COLOR }}
           />
           <span className="text-xs font-medium text-muted-foreground tracking-[-0.24px]">
-            Replied
+            {t('replied')}
           </span>
         </div>
       </div>

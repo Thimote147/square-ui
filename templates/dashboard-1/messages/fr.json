@@ -1,0 +1,53 @@
+{
+  "header": {
+    "welcome": "Bon retour, Utilisateur !",
+    "export": "Exporter",
+    "newProject": "Nouveau Projet"
+  },
+  "sidebar": {
+    "search": "Rechercher...",
+    "notifications": "Notifications",
+    "aiAssistant": "Assistant IA",
+    "dashboard": "Tableau de bord",
+    "schedule": "Planning",
+    "resources": "Ressources",
+    "clients": "Clients",
+    "integrations": "Intégrations",
+    "favorites": "Favoris",
+    "contracts": "Contrats",
+    "content": "Contenu",
+    "summaries": "Résumés",
+    "feedback": "Commentaires",
+    "settings": "Paramètres",
+    "helpCenter": "Centre d'aide",
+    "addNewTeam": "Ajouter une nouvelle équipe"
+  },
+  "stats": {
+    "totalClients": "Total Clients",
+    "activeProjects": "Projets Actifs",
+    "weeklyRevenue": "Revenu Hebdomadaire",
+    "sentInvoices": "Factures Envoyées"
+  },
+  "chart": {
+    "title": "Prospects au fil du temps",
+    "newLeads": "Nouveaux Prospects",
+    "replied": "Réponses",
+    "november": "Novembre"
+  },
+  "documents": {
+    "title": "Documents Récents",
+    "searchPlaceholder": "Rechercher des fichiers...",
+    "uploadedToday": "Aujourd'hui",
+    "uploadedYesterday": "Hier",
+    "uploadedDaysAgo": "Il y a {days} jours",
+    "uploadedWeekAgo": "Il y a une semaine",
+    "uploadedWeeksAgo": "Il y a {weeks} semaines",
+    "uploadedMonthAgo": "Il y a 1 mois",
+    "uploadedMonthsAgo": "Il y a {months} mois"
+  },
+  "common": {
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français"
+  }
+}

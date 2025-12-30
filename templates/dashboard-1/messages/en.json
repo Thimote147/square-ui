@@ -1,0 +1,53 @@
+{
+  "header": {
+    "welcome": "Welcome back, User!",
+    "export": "Export",
+    "newProject": "New Project"
+  },
+  "sidebar": {
+    "search": "Search...",
+    "notifications": "Notifications",
+    "aiAssistant": "AI Assistant",
+    "dashboard": "Dashboard",
+    "schedule": "Schedule",
+    "resources": "Resources",
+    "clients": "Clients",
+    "integrations": "Integrations",
+    "favorites": "Favorites",
+    "contracts": "Contracts",
+    "content": "Content",
+    "summaries": "Summaries",
+    "feedback": "Feedback",
+    "settings": "Settings",
+    "helpCenter": "Help Center",
+    "addNewTeam": "Add new team"
+  },
+  "stats": {
+    "totalClients": "Total Clients",
+    "activeProjects": "Active Projects",
+    "weeklyRevenue": "Weekly Revenue",
+    "sentInvoices": "Sent Invoices"
+  },
+  "chart": {
+    "title": "Leads Over Time",
+    "newLeads": "New Leads",
+    "replied": "Replied",
+    "november": "November"
+  },
+  "documents": {
+    "title": "Recent Documents",
+    "searchPlaceholder": "Search files...",
+    "uploadedToday": "Today",
+    "uploadedYesterday": "Yesterday",
+    "uploadedDaysAgo": "{days} Days Ago",
+    "uploadedWeekAgo": "A Week Ago",
+    "uploadedWeeksAgo": "{weeks} Weeks Ago",
+    "uploadedMonthAgo": "1 Month Ago",
+    "uploadedMonthsAgo": "{months} Months Ago"
+  },
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "french": "French"
+  }
+}

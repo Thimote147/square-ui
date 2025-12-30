@@ -1,6 +1,6 @@
 export type StatCard = {
   id: string;
-  title: string;
+  titleKey: string;
   value: string;
   icon: string;
 };
@@ -8,25 +8,25 @@ export type StatCard = {
 export const mockStats: StatCard[] = [
   {
     id: "1",
-    title: "Total Clients",
+    titleKey: "stats.totalClients",
     value: "67",
     icon: "users",
   },
   {
     id: "2",
-    title: "Active Projects",
+    titleKey: "stats.activeProjects",
     value: "12",
     icon: "clipboard",
   },
   {
     id: "3",
-    title: "Weekly Revenue",
+    titleKey: "stats.weeklyRevenue",
     value: "$4,571",
     icon: "wallet",
   },
   {
     id: "4",
-    title: "Sent Invoices",
+    titleKey: "stats.sentInvoices",
     value: "32",
     icon: "invoice",
   },
