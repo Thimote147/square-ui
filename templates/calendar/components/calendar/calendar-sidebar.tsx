@@ -56,7 +56,7 @@ export function CalendarSidebar({
       <SidebarHeader className="pb-0">
         <div className="px-2 py-1.5">
           <Link
-            href="https://square.lndev.me"
+            href="https://square.thimotefetu.be"
             target="_blank"
             className="flex items-center justify-between mb-4"
           >
@@ -226,11 +226,11 @@ export function CalendarSidebar({
       <SidebarFooter className="p-4">
         <Button className="w-full" asChild>
           <Link
-            href="https://square.lndev.me"
+            href="https://square.thimotefetu.be"
             target="_blank"
             rel="noopener noreferrer"
           >
-            square.lndev.me
+            square.thimotefetu.be
             <ArrowUpRight className="size-4" />
           </Link>
         </Button>
@@ -270,7 +270,7 @@ export function CalendarSidebar({
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-medium text-foreground truncate">LN</p>
-            <p className="text-xs text-muted-foreground truncate">lndev.me</p>
+            <p className="text-xs text-muted-foreground truncate">thimotefetu.be</p>
           </div>
           <Settings className="size-4 text-muted-foreground" />
         </div>

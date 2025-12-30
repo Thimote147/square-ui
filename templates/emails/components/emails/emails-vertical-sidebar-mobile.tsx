@@ -67,7 +67,7 @@ export function EmailsVerticalSidebarMobile({
         </Button>
         <div className="flex flex-col justify-center">
           <span className="text-sm font-semibold text-foreground">Square UI</span>
-          <span className="text-xs text-muted-foreground">lndev.me</span>
+          <span className="text-xs text-muted-foreground">thimotefetu.be</span>
         </div>
       </div>
 

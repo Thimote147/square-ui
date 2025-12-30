@@ -42,7 +42,7 @@ export function ProjectsTopBar() {
               asChild
             >
               <Link
-                href="https://github.com/ln-dev7/square-ui/tree/master/templates/projects-timeline"
+                href="https://github.com/Thimote147/square-ui/tree/master/templates/projects-timeline"
                 target="_blank"
                 rel="noopener noreferrer"
               >

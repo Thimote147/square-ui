@@ -81,7 +81,7 @@ export function ChatSidebar() {
               <div className="ml-auto flex items-center gap-1.5">
                 <Image
                   src="/ln.png"
-                  alt="lndev.me"
+                  alt="thimotefetu.be"
                   className="size-5 object-cover rounded-full"
                   width={20}
                   height={20}
@@ -110,12 +110,12 @@ export function ChatSidebar() {
             <DropdownMenuItem className="gap-2">
               <Image
                 src="/ln.png"
-                alt="lndev.me"
+                alt="thimotefetu.be"
                 className="size-4 object-cover rounded-full"
                 width={16}
                 height={16}
               />
-              <span>lndev.me</span>
+              <span>thimotefetu.be</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -331,13 +331,13 @@ export function ChatSidebar() {
             asChild
           >
             <Link
-              href="https://square.lndev.me"
+              href="https://square.thimotefetu.be"
               target="_blank"
               rel="noopener noreferrer"
             >
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(205,175,250,1),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(129,169,248,1),transparent_50%),radial-gradient(ellipse_at_top_left,rgba(247,203,191,1),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(164,252,245,1),transparent_50%)]" />
               <span className="relative z-10 font-medium text-xs">
-                square.lndev.me
+                square.thimotefetu.be
               </span>
             </Link>
           </Button>

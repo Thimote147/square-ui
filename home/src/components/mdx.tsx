@@ -18,7 +18,7 @@ export const img = function Img(props: ImagePropsWithOptionalAlt) {
     <div className="relative overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-900">
       <Image
         alt=""
-        className='object-cover'
+        className="object-cover"
         width={3024}
         height={1896}
         quality={100}

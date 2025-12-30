@@ -73,19 +73,19 @@
     column-gap: theme(gap.3);
   }
 
-  h2>a {
+  h2 > a {
     display: flex;
     align-items: center;
     column-gap: theme(gap.3);
   }
 
-  h2>a>svg {
+  h2 > a > svg {
     flex: none;
     width: theme(width.4);
     height: theme(height.4);
   }
 
-  h3>svg {
+  h3 > svg {
     flex: none;
     width: theme(width.4);
     height: theme(height.4);
@@ -211,7 +211,7 @@
     color: var(--color-gray-400);
   }
 
-  ol>li::marker {
+  ol > li::marker {
     font-size: var(--text-xs);
     font-weight: var(--font-weight-semibold);
   }
@@ -258,7 +258,7 @@
   }
 
   /* Spacing */
-  >* {
+  > * {
     margin-top: theme(margin.6);
   }
 
@@ -274,24 +274,24 @@
     margin-top: theme(margin.4);
   }
 
-  li> :is(p, ol, ul) {
+  li > :is(p, ol, ul) {
     margin-top: theme(margin.4);
   }
 
-  :is(h2, h3, h4)+* {
+  :is(h2, h3, h4) + * {
     margin-top: theme(margin.4);
   }
 
-  :is(blockquote, pre, table)+* {
+  :is(blockquote, pre, table) + * {
     margin-top: theme(margin.8);
   }
 
-  hr+* {
+  hr + * {
     margin-top: theme(margin.16);
   }
 
   > :first-child,
-  li> :first-child {
+  li > :first-child {
     margin-top: 0;
   }
 }

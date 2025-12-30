@@ -41,7 +41,7 @@ export function TaskHeader() {
         <div className="flex items-center gap-2 lg:gap-4">
           <Button variant="outline" className="shadow-none" asChild>
             <Link
-              href="https://github.com/ln-dev7/square-ui/tree/master/templates/task-management"
+              href="https://github.com/Thimote147/square-ui/tree/master/templates/task-management"
               target="_blank"
               rel="noopener noreferrer"
             >

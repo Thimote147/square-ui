@@ -41,7 +41,7 @@ export default function ChatPage() {
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon-sm" asChild>
               <Link
-                href="https://github.com/ln-dev7/square-ui/tree/master/templates/chat"
+                href="https://github.com/Thimote147/square-ui/tree/master/templates/chat"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -55,7 +55,7 @@ export default function ChatPage() {
         <div className="hidden md:flex absolute top-4 right-4 gap-2 z-20">
           <Button variant="ghost" size="icon-sm" asChild>
             <Link
-              href="https://github.com/ln-dev7/square-ui/tree/master/templates/chat"
+              href="https://github.com/Thimote147/square-ui/tree/master/templates/chat"
               target="_blank"
               rel="noopener noreferrer"
             >

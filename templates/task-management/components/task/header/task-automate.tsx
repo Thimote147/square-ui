@@ -54,9 +54,6 @@ export function TaskAutomate() {
         <div className="space-y-4">
           <div>
             <h3 className="text-sm font-semibold mb-1">Automation Rules</h3>
-            <p className="text-xs text-muted-foreground">
-              Upgrade to Pro to unlock automation features
-            </p>
           </div>
 
           <div className="space-y-2">
@@ -78,11 +75,6 @@ export function TaskAutomate() {
               );
             })}
           </div>
-
-          <Button className="w-full" size="sm">
-            <Sparkle className="size-4" />
-            Upgrade to Pro
-          </Button>
         </div>
       </PopoverContent>
     </Popover>

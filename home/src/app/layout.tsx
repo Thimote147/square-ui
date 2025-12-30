@@ -20,7 +20,7 @@ const monaSans = localFont({
   weight: '200 900',
 })
 
-const siteUrl = 'https://square.lndev.me'
+const siteUrl = 'https://square.thimotefetu.be'
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  authors: [{ name: 'Leonel NGOYA', url: 'https://lndev.me/' }],
+  authors: [{ name: 'Leonel NGOYA', url: 'https://thimotefetu.be/' }],
   keywords: ['ui', 'lndev', 'components', 'template'],
 }
 

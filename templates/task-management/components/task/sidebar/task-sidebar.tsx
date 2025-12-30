@@ -151,7 +151,7 @@ export function TaskSidebar({
             </DropdownMenu>
             <Image
               src="/ln.png"
-              alt="lndev.me"
+              alt="thimotefetu.be"
               className="size-5 object-cover rounded-full"
               width={20}
               height={20}
@@ -222,10 +222,10 @@ export function TaskSidebar({
           className="w-full justify-between px-3 py-2 h-auto text-sm shadow-none"
           asChild
         >
-          <Link href="https://square.lndev.me" target="_blank">
+          <Link href="https://square.thimotefetu.be" target="_blank">
             <div className="flex items-center gap-3">
               <HelpCircle className="size-4" />
-              <span>square.lndev.me</span>
+              <span>square.thimotefetu.be</span>
             </div>
             <ArrowUpRight className="size-4" />
           </Link>

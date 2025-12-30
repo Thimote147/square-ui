@@ -165,7 +165,7 @@ export function CalendarHeader() {
               <ThemeToggle />
 
               <Link
-                href="https://github.com/ln-dev7/square-ui/tree/master/templates/calendar"
+                href="https://github.com/Thimote147/square-ui/tree/master/templates/calendar"
                 target="_blank"
                 rel="noopener noreferrer"
               >

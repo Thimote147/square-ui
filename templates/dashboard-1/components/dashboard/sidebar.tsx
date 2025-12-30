@@ -74,8 +74,8 @@ export function DashboardSidebar({
                   </div>
                   <div className="flex items-center gap-2">
                     <Image
-                      src="/ln.png"
-                      alt="lndev.me"
+                      src="/.png"
+                      alt="thimotefetu.be"
                       className="size-5 object-cover rounded-full"
                       width={20}
                       height={20}
@@ -105,9 +105,9 @@ export function DashboardSidebar({
                 <DropdownMenuItem>
                   <div className="flex items-center gap-3 w-full">
                     <div className="size-6 bg-linear-to-br from-orange-500 to-red-600 rounded-sm shadow flex items-center justify-center text-white text-xs font-semibold">
-                      LN
+                      
                     </div>
-                    <span>lndev-ui</span>
+                    <span>dev-ui</span>
                   </div>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />

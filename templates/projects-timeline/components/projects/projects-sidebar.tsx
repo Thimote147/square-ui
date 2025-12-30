@@ -81,7 +81,7 @@ export function ProjectsSidebar({
     <Sidebar className="lg:border-r-0!" collapsible="offcanvas" {...props}>
       <SidebarHeader className="border-b px-4 py-3 h-[65px] lg:h-[74px] flex items-center justify-center">
         <Link
-          href="https://square.lndev.me"
+          href="https://square.thimotefetu.be"
           target="_blank"
           className="flex items-center justify-between w-full"
         >
@@ -93,7 +93,7 @@ export function ProjectsSidebar({
               <h1 className="font-semibold text-sm">Square UI</h1>
               <div className="flex items-center gap-1">
                 <Globe className="size-3" />
-                <span className="text-xs">lndev.me</span>
+                <span className="text-xs">thimotefetu.be</span>
               </div>
             </div>
           </div>
@@ -179,17 +179,17 @@ export function ProjectsSidebar({
             target="_blank"
             rel="noreferrer"
             className="absolute inset-0"
-            href="https://square.lndev.me"
+            href="https://square.thimotefetu.be"
           >
             <span className="sr-only">Square by lndev-ui</span>
           </Link>
           <Button size="sm" className="w-full">
             <Link
-              href="https://square.lndev.me"
+              href="https://square.thimotefetu.be"
               target="_blank"
               rel="noopener noreferrer"
             >
-              square.lndev.me
+              square.thimotefetu.be
             </Link>
           </Button>
         </div>

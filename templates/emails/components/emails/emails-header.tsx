@@ -77,7 +77,7 @@ export function EmailsHeader({ onMobileMenuClick }: EmailsHeaderProps) {
           <ThemeToggle />
           <Button variant="secondary" size="sm" className="h-[30px]" asChild>
             <Link
-              href="https://github.com/ln-dev7/square-ui/tree/master/templates/emails"
+              href="https://github.com/Thimote147/square-ui/tree/master/templates/emails"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -85,21 +85,13 @@ export function EmailsHeader({ onMobileMenuClick }: EmailsHeaderProps) {
               GitHub
             </Link>
           </Button>
-          <Button
-            size="sm"
-            className="relative h-[30px] overflow-hidden bg-linear-to-r from-white to-white hover:opacity-90"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(205,175,250,1),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(129,169,248,1),transparent_50%),radial-gradient(ellipse_at_top_left,rgba(247,203,191,1),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(164,252,245,1),transparent_50%)]" />
-            <WandSparklesIcon className="relative size-4 text-black" />
-            <span className="relative text-black">Upgrade to Pro</span>
-          </Button>
         </div>
       </div>
 
       <div className="flex md:hidden items-center gap-2">
         <Button variant="ghost" size="icon-sm" asChild>
           <Link
-            href="https://github.com/ln-dev7/square-ui/tree/master/templates/emails"
+            href="https://github.com/Thimote147/square-ui/tree/master/templates/emails"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -119,11 +111,6 @@ export function EmailsHeader({ onMobileMenuClick }: EmailsHeaderProps) {
             <DropdownMenuItem>
               <Link2Icon className="size-4" />
               <span>Share</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <WandSparklesIcon className="size-4" />
-              <span>Upgrade to Pro</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <div className="px-2 py-1.5">

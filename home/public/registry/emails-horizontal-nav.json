@@ -5,9 +5,7 @@
   "title": "Emails Horizontal Navigation",
   "description": "Horizontal navigation for email categories and filters.",
   "registryDependencies": [],
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "files": [
     {
       "path": "https://raw.githubusercontent.com/ln-dev7/square-ui/master/templates/emails/components/emails/emails-horizontal-nav.tsx",

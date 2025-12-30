@@ -69,7 +69,7 @@ export function Intro() {
           Sponsor
         </IconLink>
         <IconLink
-          href="https://github.com/ln-dev7/square-ui"
+          href="https://github.com/Thimote147/square-ui"
           target="_blank"
           icon={GitHubIcon}
           className="flex-none"

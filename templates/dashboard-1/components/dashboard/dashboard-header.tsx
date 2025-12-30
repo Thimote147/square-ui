@@ -12,7 +12,7 @@ export function DashboardHeader() {
       <div className="flex items-center gap-2 min-w-0 flex-1">
         <SidebarTrigger className="shrink-0" />
         <h1 className="text-base sm:text-xl md:text-2xl font-medium text-foreground truncate">
-          Welcome back, LN 👋
+          Welcome back, User!
         </h1>
       </div>
 
@@ -29,7 +29,7 @@ export function DashboardHeader() {
         </div>
         <Button variant="ghost" size="icon-sm" className="shrink-0" asChild>
           <Link
-            href="https://github.com/ln-dev7/square-ui/tree/master/templates/dashboard-1"
+            href="https://github.com/Thimote147/square-ui/tree/master/templates/dashboard-1"
             target="_blank"
             rel="noopener noreferrer"
           >

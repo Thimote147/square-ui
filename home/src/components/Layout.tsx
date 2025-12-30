@@ -1,9 +1,9 @@
 import { useId } from 'react'
 
-import { Intro, IntroFooter } from '@/components/Intro'
 import { StarField } from '@/components/StarField'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { TemplatesButton } from '@/components/templates-button'
+import { Intro, IntroFooter } from './Intro'
 
 function Timeline() {
   let id = useId()
