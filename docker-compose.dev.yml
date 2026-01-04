@@ -1,0 +1,246 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: square-ui-postgres-dev
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: square_ui
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  home:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-home:dev-latest
+    container_name: square-ui-home-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  calendar:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-calendar:dev-latest
+    container_name: square-ui-calendar-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  chat:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-chat:dev-latest
+    container_name: square-ui-chat-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3002:3000"
+    restart: unless-stopped
+
+  emails:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-emails:dev-latest
+    container_name: square-ui-emails-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3003:3000"
+    restart: unless-stopped
+
+  dashboard-1:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-1:dev-latest
+    container_name: square-ui-dashboard-1-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3004:3000"
+    restart: unless-stopped
+
+  task-management:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-task-management:dev-latest
+    container_name: square-ui-task-management-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3005:3000"
+    restart: unless-stopped
+
+  projects-timeline:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-projects-timeline:dev-latest
+    container_name: square-ui-projects-timeline-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3006:3000"
+    restart: unless-stopped
+
+  dashboard-2:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-2:dev-latest
+    container_name: square-ui-dashboard-2-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3007:3000"
+    restart: unless-stopped
+
+  dashboard-3:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-3:dev-latest
+    container_name: square-ui-dashboard-3-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3008:3000"
+    restart: unless-stopped
+
+  dashboard-4:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-4:dev-latest
+    container_name: square-ui-dashboard-4-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3009:3000"
+    restart: unless-stopped
+
+  employees:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-employees:dev-latest
+    container_name: square-ui-employees-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3010:3000"
+    restart: unless-stopped
+
+  files:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-files:dev-latest
+    container_name: square-ui-files-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3011:3000"
+    restart: unless-stopped
+
+  leads:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-leads:dev-latest
+    container_name: square-ui-leads-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3012:3000"
+    restart: unless-stopped
+
+  payrolls:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-payrolls:dev-latest
+    container_name: square-ui-payrolls-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3013:3000"
+    restart: unless-stopped
+
+  tasks:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-tasks:dev-latest
+    container_name: square-ui-tasks-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3014:3000"
+    restart: unless-stopped
+
+  dashboard-3-baseui:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-3-baseui:dev-latest
+    container_name: square-ui-dashboard-3-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3015:3000"
+    restart: unless-stopped
+
+  dashboard-4-baseui:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-4-baseui:dev-latest
+    container_name: square-ui-dashboard-4-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3016:3000"
+    restart: unless-stopped
+
+  emails-baseui:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-emails-baseui:dev-latest
+    container_name: square-ui-emails-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3017:3000"
+    restart: unless-stopped
+
+  files-baseui:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-files-baseui:dev-latest
+    container_name: square-ui-files-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3018:3000"
+    restart: unless-stopped
+
+  leads-baseui:
+    image: ghcr.io/${IMAGE_PREFIX}/square-ui-leads-baseui:dev-latest
+    container_name: square-ui-leads-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3019:3000"
+    restart: unless-stopped
+
+volumes:
+  postgres_data_dev:

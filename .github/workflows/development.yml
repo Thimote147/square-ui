@@ -97,34 +97,59 @@ jobs:
       - name: Deploy to development
         env:
           DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.DEV_APP_URL }}
           DEPLOY_HOST: ${{ secrets.DEV_DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEV_DEPLOY_USER }}
           DEPLOY_KEY: ${{ secrets.DEV_DEPLOY_KEY }}
+          DEPLOY_PORT: ${{ secrets.DEV_DEPLOY_PORT }}
         run: |
-          echo "Development deployment step"
-          echo "Configure your deployment commands here"
-          # Example: SSH to dev server and run docker compose pull && docker compose up -d
-          # Or use your preferred deployment method
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${DEPLOY_PORT:-22} "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+          
+          ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << 'EOFDEV'
+            set -e
+            cd /app/square-ui
+            export DATABASE_URL="$DATABASE_URL"
+            export NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL"
+            git fetch origin dev
+            git reset --hard origin/dev
+            docker compose -f docker-compose.dev.yml pull --ignore-pull-failures || true
+            docker compose -f docker-compose.dev.yml up -d
+            docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
+          EOFDEV
 
       - name: Database migration
         env:
           DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+          DEPLOY_HOST: ${{ secrets.DEV_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEV_DEPLOY_USER }}
+          DEPLOY_KEY: ${{ secrets.DEV_DEPLOY_KEY }}
+          DEPLOY_PORT: ${{ secrets.DEV_DEPLOY_PORT }}
         run: |
-          echo "Running database migrations on development"
-          # Add your migration commands here
-          # Example: npx prisma migrate deploy
-
-      - name: Run tests
-        run: |
-          echo "Running tests"
-          # Add your test commands here
-          # Example: npm test
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${DEPLOY_PORT:-22} "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+          
+          ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << 'EOFMIG'
+            set -e
+            cd /app/square-ui
+            export DATABASE_URL="$DATABASE_URL"
+            docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
+          EOFMIG
 
       - name: Notify deployment status
         if: always()
-        run: |
-          echo "Deployment completed with status: ${{ job.status }}"
-          # Add notification logic here (Slack, Discord, email, etc.)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const message = status === 'success' 
+              ? '✅ Development deployment successful!' 
+              : '❌ Development deployment failed!';
+            console.log(message);
 
   lint-and-test:
     runs-on: ubuntu-latest
