@@ -91,7 +91,7 @@ services:
     networks:
       - square-ui-network
 
-  square-ui-dashboard-1:
+  square-ui-dashboard:
     image: node:20-alpine
     working_dir: /app
     command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && npx prisma generate && TURBOPACK=0 pnpm dev"
