@@ -20,7 +20,11 @@ services:
     restart: unless-stopped
 
   home:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-home:latest
+    build:
+      context: ./home
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-home-prod
     depends_on:
       postgres:
@@ -34,7 +38,11 @@ services:
     restart: unless-stopped
 
   calendar:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-calendar:latest
+    build:
+      context: ./templates/calendar
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-calendar-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -45,7 +53,11 @@ services:
     restart: unless-stopped
 
   chat:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-chat:latest
+    build:
+      context: ./templates/chat
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-chat-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -56,7 +68,11 @@ services:
     restart: unless-stopped
 
   emails:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-emails:latest
+    build:
+      context: ./templates/emails
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-emails-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -67,7 +83,11 @@ services:
     restart: unless-stopped
 
   dashboard-1:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-1:latest
+    build:
+      context: ./templates/dashboard-1
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-1-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -78,7 +98,11 @@ services:
     restart: unless-stopped
 
   task-management:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-task-management:latest
+    build:
+      context: ./templates/task-management
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-task-management-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -89,7 +113,11 @@ services:
     restart: unless-stopped
 
   projects-timeline:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-projects-timeline:latest
+    build:
+      context: ./templates/projects-timeline
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-projects-timeline-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -100,7 +128,11 @@ services:
     restart: unless-stopped
 
   dashboard-2:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-2:latest
+    build:
+      context: ./templates/dashboard-2
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-2-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -111,7 +143,11 @@ services:
     restart: unless-stopped
 
   dashboard-3:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-3:latest
+    build:
+      context: ./templates/dashboard-3
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-3-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -122,7 +158,11 @@ services:
     restart: unless-stopped
 
   dashboard-4:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-4:latest
+    build:
+      context: ./templates/dashboard-4
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-4-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -133,7 +173,11 @@ services:
     restart: unless-stopped
 
   employees:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-employees:latest
+    build:
+      context: ./templates/employees
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-employees-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -144,7 +188,11 @@ services:
     restart: unless-stopped
 
   files:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-files:latest
+    build:
+      context: ./templates/files
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-files-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -155,7 +203,11 @@ services:
     restart: unless-stopped
 
   leads:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-leads:latest
+    build:
+      context: ./templates/leads
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-leads-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -166,7 +218,11 @@ services:
     restart: unless-stopped
 
   payrolls:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-payrolls:latest
+    build:
+      context: ./templates/payrolls
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-payrolls-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -177,7 +233,11 @@ services:
     restart: unless-stopped
 
   tasks:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-tasks:latest
+    build:
+      context: ./templates/tasks
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-tasks-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -188,7 +248,11 @@ services:
     restart: unless-stopped
 
   dashboard-3-baseui:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-3-baseui:latest
+    build:
+      context: ./templates-baseui/dashboard-3
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-3-baseui-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -199,7 +263,11 @@ services:
     restart: unless-stopped
 
   dashboard-4-baseui:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-dashboard-4-baseui:latest
+    build:
+      context: ./templates-baseui/dashboard-4
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-dashboard-4-baseui-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -210,7 +278,11 @@ services:
     restart: unless-stopped
 
   emails-baseui:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-emails-baseui:latest
+    build:
+      context: ./templates-baseui/emails
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-emails-baseui-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -221,7 +293,11 @@ services:
     restart: unless-stopped
 
   files-baseui:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-files-baseui:latest
+    build:
+      context: ./templates-baseui/files
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-files-baseui-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -232,7 +308,11 @@ services:
     restart: unless-stopped
 
   leads-baseui:
-    image: ghcr.io/${IMAGE_PREFIX}/square-ui-leads-baseui:latest
+    build:
+      context: ./templates-baseui/leads
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     container_name: square-ui-leads-baseui-prod
     environment:
       DATABASE_URL: ${DATABASE_URL}

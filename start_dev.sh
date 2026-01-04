@@ -54,24 +54,17 @@ fi
 
 # Generate Prisma Client
 echo -e "${BLUE}🔧 Generating Prisma Client...${NC}"
-pnpm db:generate > /dev/null 2>&1
-echo -e "${GREEN}✓ Prisma Client generated${NC}"
-
-# Push database schema
-echo -e "${BLUE}📊 Pushing database schema...${NC}"
-if pnpm db:push > /dev/null 2>&1; then
-    echo -e "${GREEN}✓ Database schema pushed${NC}"
+if command -v pnpm &> /dev/null; then
+    pnpm db:generate
+elif command -v npm &> /dev/null; then
+    npm run db:generate 2>/dev/null || echo -e "${YELLOW}⚠️  No db:generate script in package.json${NC}"
 else
-    echo -e "${YELLOW}⚠️  Schema already in sync${NC}"
+    echo -e "${YELLOW}⚠️  Neither pnpm nor npm found${NC}"
 fi
+echo -e "${GREEN}✓ Prisma setup completed${NC}"
 
-# Seed database
-echo -e "${BLUE}🌱 Seeding database with sample data...${NC}"
-if pnpm db:seed 2>&1 | grep -q "Database seeded successfully"; then
-    echo -e "${GREEN}✓ Database seeded successfully${NC}"
-else
-    echo -e "${YELLOW}⚠️  Database seeding skipped (may already be seeded)${NC}"
-fi
+# Skip database push/seed - these run in the home container via docker compose
+echo -e "${BLUE}📊 Database setup will run in container on first startup${NC}"
 
 echo ""
 echo -e "${GREEN}✓ Database setup complete!${NC}"
