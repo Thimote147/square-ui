@@ -1,0 +1,500 @@
+// This is your Prisma schema file for Square UI
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =======================
+// USER & AUTHENTICATION
+// =======================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  avatar    String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tasks         Task[]
+  projects      ProjectMember[]
+  messages      Message[]
+  events        Event[]
+  emails        Email[]
+  documents     Document[]
+  notifications Notification[]
+  teamMembers   TeamMember[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  MANAGER
+}
+
+// =======================
+// DASHBOARD DATA
+// =======================
+
+model Person {
+  id       String       @id @default(cuid())
+  name     String
+  jobTitle String
+  status   PersonStatus @default(ACTIVE)
+  email    String       @unique
+  phone    String
+  tags     String[]
+  address  String
+  avatar   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("people")
+}
+
+enum PersonStatus {
+  ACTIVE
+  OFFLINE
+  AWAY
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  name       String
+  size       String
+  author     String
+  authorId   String?
+  uploadedAt DateTime @default(now())
+  icon       String   @default("file")
+
+  user User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@map("documents")
+}
+
+model ChartData {
+  id        String @id @default(cuid())
+  month     String
+  newLeads  Int
+  replied   Int
+  year      Int    @default(2025)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([month, year])
+  @@map("chart_data")
+}
+
+model Stat {
+  id        String   @id @default(cuid())
+  titleKey  String
+  value     String
+  icon      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([titleKey])
+  @@map("stats")
+}
+
+// =======================
+// TASK MANAGEMENT
+// =======================
+
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  priority    Priority   @default(MEDIUM)
+  dueDate     DateTime?
+  assigneeId  String?
+  projectId   String?
+  order       Int        @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assignee User?     @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
+  project  Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  comments Comment[]
+  tags     TaskTag[]
+
+  @@index([status])
+  @@index([assigneeId])
+  @@index([projectId])
+  @@map("tasks")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  DONE
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  taskId  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model TaskTag {
+  id     String @id @default(cuid())
+  name   String
+  color  String @default("#3B82F6")
+  taskId String
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([name, taskId])
+  @@map("task_tags")
+}
+
+// =======================
+// PROJECTS
+// =======================
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      String   @default("active")
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  color       String   @default("#3B82F6")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks      Task[]
+  members    ProjectMember[]
+  milestones Milestone[]
+
+  @@map("projects")
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  role      String   @default("member")
+  joinedAt  DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@map("project_members")
+}
+
+model Milestone {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  projectId   String
+  dueDate     DateTime
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("milestones")
+}
+
+// =======================
+// CALENDAR & EVENTS
+// =======================
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  startTime   DateTime
+  endTime     DateTime
+  location    String?
+  color       String    @default("#3B82F6")
+  userId      String
+  allDay      Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attendees   EventAttendee[]
+  reminders   EventReminder[]
+
+  @@index([userId])
+  @@index([startTime])
+  @@map("events")
+}
+
+model EventAttendee {
+  id      String @id @default(cuid())
+  eventId String
+  email   String
+  name    String
+  status  String @default("pending") // pending, accepted, declined
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, email])
+  @@map("event_attendees")
+}
+
+model EventReminder {
+  id           String   @id @default(cuid())
+  eventId      String
+  minutesBefore Int
+  sent         Boolean  @default(false)
+  sentAt       DateTime?
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_reminders")
+}
+
+// =======================
+// CHAT & MESSAGES
+// =======================
+
+model Conversation {
+  id        String   @id @default(cuid())
+  name      String?
+  type      ConversationType @default(DIRECT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages      Message[]
+  participants  ConversationParticipant[]
+
+  @@map("conversations")
+}
+
+enum ConversationType {
+  DIRECT
+  GROUP
+  CHANNEL
+}
+
+model ConversationParticipant {
+  id             String   @id @default(cuid())
+  conversationId String
+  userId         String
+  joinedAt       DateTime @default(now())
+  lastReadAt     DateTime?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+}
+
+model Message {
+  id             String    @id @default(cuid())
+  content        String
+  conversationId String
+  senderId       String
+  edited         Boolean   @default(false)
+  editedAt       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  attachments  MessageAttachment[]
+  reactions    MessageReaction[]
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@map("messages")
+}
+
+model MessageAttachment {
+  id        String @id @default(cuid())
+  messageId String
+  url       String
+  filename  String
+  filesize  Int
+  mimetype  String
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("message_attachments")
+}
+
+model MessageReaction {
+  id        String @id @default(cuid())
+  messageId String
+  userId    String
+  emoji     String
+
+  createdAt DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId, emoji])
+  @@map("message_reactions")
+}
+
+// =======================
+// EMAILS
+// =======================
+
+model Email {
+  id          String      @id @default(cuid())
+  from        String
+  to          String[]
+  cc          String[]    @default([])
+  bcc         String[]    @default([])
+  subject     String
+  body        String
+  htmlBody    String?
+  status      EmailStatus @default(SENT)
+  isRead      Boolean     @default(false)
+  isStarred   Boolean     @default(false)
+  folder      String      @default("inbox") // inbox, sent, drafts, trash, spam
+  userId      String
+  threadId    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attachments EmailAttachment[]
+  labels      EmailLabel[]
+
+  @@index([userId])
+  @@index([folder])
+  @@index([threadId])
+  @@map("emails")
+}
+
+enum EmailStatus {
+  DRAFT
+  SENT
+  FAILED
+  SCHEDULED
+}
+
+model EmailAttachment {
+  id       String @id @default(cuid())
+  emailId  String
+  filename String
+  url      String
+  size     Int
+
+  email Email @relation(fields: [emailId], references: [id], onDelete: Cascade)
+
+  @@map("email_attachments")
+}
+
+model EmailLabel {
+  id      String @id @default(cuid())
+  emailId String
+  name    String
+  color   String @default("#3B82F6")
+
+  email Email @relation(fields: [emailId], references: [id], onDelete: Cascade)
+
+  @@unique([emailId, name])
+  @@map("email_labels")
+}
+
+// =======================
+// NOTIFICATIONS
+// =======================
+
+model Notification {
+  id      String           @id @default(cuid())
+  userId  String
+  type    NotificationType
+  title   String
+  message String
+  read    Boolean          @default(false)
+  link    String?
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@map("notifications")
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  TASK_ASSIGNED
+  TASK_COMPLETED
+  PROJECT_UPDATED
+  MESSAGE_RECEIVED
+  EVENT_REMINDER
+  EMAIL_RECEIVED
+}
+
+// =======================
+// TEAMS
+// =======================
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  avatar      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members TeamMember[]
+
+  @@map("teams")
+}
+
+model TeamMember {
+  id       String @id @default(cuid())
+  teamId   String
+  userId   String
+  role     String @default("member") // owner, admin, member
+  joinedAt DateTime @default(now())
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+  @@map("team_members")
+}

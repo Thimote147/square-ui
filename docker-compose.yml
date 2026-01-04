@@ -1,6 +1,24 @@
-version: '3.8'
-
 services:
+  # PostgreSQL Database - Shared by ALL templates
+  postgres:
+    image: postgres:18-alpine
+    container_name: square-ui-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: square_ui
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - square-ui-network
+
   square-ui-home:
     image: node:20-alpine
     working_dir: /app
@@ -14,6 +32,8 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-home
+    networks:
+      - square-ui-network
 
   square-ui-calendar:
     image: node:20-alpine
@@ -28,6 +48,8 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-calendar
+    networks:
+      - square-ui-network
 
   square-ui-chat:
     image: node:20-alpine
@@ -42,6 +64,8 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-chat
+    networks:
+      - square-ui-network
 
   square-ui-emails:
     image: node:20-alpine
@@ -56,11 +80,13 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-emails
+    networks:
+      - square-ui-network
 
   square-ui-dashboard:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && npx prisma generate && TURBOPACK=0 pnpm dev"
     ports:
       - "3004:3000"
     volumes:
@@ -68,8 +94,15 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@square-ui-postgres:5432/square_ui?schema=public
+      - TURBOPACK=0
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: "no"
     container_name: square-ui-dashboard
+    networks:
+      - square-ui-network
 
   square-ui-task-management:
     image: node:20-alpine
@@ -84,6 +117,8 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-task-management
+    networks:
+      - square-ui-network
 
   square-ui-projects-timeline:
     image: node:20-alpine
@@ -98,3 +133,29 @@ services:
       - NODE_ENV=development
     restart: "no"
     container_name: square-ui-projects-timeline
+    networks:
+      - square-ui-network
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: square-ui-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@square-ui.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres
+    profiles:
+      - tools
+    networks:
+      - square-ui-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  square-ui-network:
+    driver: bridge
