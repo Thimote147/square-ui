@@ -22,14 +22,16 @@ services:
   square-ui-home:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "npm install && TURBOPACK=0 npm run dev"
     ports:
       - "3000:3000"
     volumes:
       - ./home:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-home
     networks:
@@ -38,14 +40,16 @@ services:
   square-ui-calendar:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
     ports:
       - "3001:3000"
     volumes:
       - ./templates/calendar:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-calendar
     networks:
@@ -54,14 +58,16 @@ services:
   square-ui-chat:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
     ports:
       - "3002:3000"
     volumes:
       - ./templates/chat:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-chat
     networks:
@@ -70,20 +76,22 @@ services:
   square-ui-emails:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
     ports:
       - "3003:3000"
     volumes:
       - ./templates/emails:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-emails
     networks:
       - square-ui-network
 
-  square-ui-dashboard:
+  square-ui-dashboard-1:
     image: node:20-alpine
     working_dir: /app
     command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && npx prisma generate && TURBOPACK=0 pnpm dev"
@@ -92,6 +100,7 @@ services:
     volumes:
       - ./templates/dashboard-1:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://postgres:postgres@square-ui-postgres:5432/square_ui?schema=public
@@ -107,14 +116,16 @@ services:
   square-ui-task-management:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
     ports:
       - "3005:3000"
     volumes:
       - ./templates/task-management:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-task-management
     networks:
@@ -123,16 +134,253 @@ services:
   square-ui-projects-timeline:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && pnpm dev"
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
     ports:
       - "3006:3000"
     volumes:
       - ./templates/projects-timeline:/app
       - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
+      - TURBOPACK=0
     restart: "no"
     container_name: square-ui-projects-timeline
+    networks:
+      - square-ui-network
+
+  square-ui-dashboard-2:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3007:3000"
+    volumes:
+      - ./templates/dashboard-2:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-dashboard-2
+    networks:
+      - square-ui-network
+
+  square-ui-dashboard-3:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3008:3000"
+    volumes:
+      - ./templates/dashboard-3:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-dashboard-3
+    networks:
+      - square-ui-network
+
+  square-ui-dashboard-4:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3009:3000"
+    volumes:
+      - ./templates/dashboard-4:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-dashboard-4
+    networks:
+      - square-ui-network
+
+  square-ui-employees:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3010:3000"
+    volumes:
+      - ./templates/employees:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-employees
+    networks:
+      - square-ui-network
+
+  square-ui-files:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3011:3000"
+    volumes:
+      - ./templates/files:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-files
+    networks:
+      - square-ui-network
+
+  square-ui-leads:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3012:3000"
+    volumes:
+      - ./templates/leads:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-leads
+    networks:
+      - square-ui-network
+
+  square-ui-payrolls:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3013:3000"
+    volumes:
+      - ./templates/payrolls:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-payrolls
+    networks:
+      - square-ui-network
+
+  square-ui-tasks:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3014:3000"
+    volumes:
+      - ./templates/tasks:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-tasks
+    networks:
+      - square-ui-network
+
+  # Base UI Templates
+  square-ui-dashboard-3-baseui:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3015:3000"
+    volumes:
+      - ./templates-baseui/dashboard-3:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-dashboard-3-baseui
+    networks:
+      - square-ui-network
+
+  square-ui-dashboard-4-baseui:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3016:3000"
+    volumes:
+      - ./templates-baseui/dashboard-4:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-dashboard-4-baseui
+    networks:
+      - square-ui-network
+
+  square-ui-emails-baseui:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3017:3000"
+    volumes:
+      - ./templates-baseui/emails:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-emails-baseui
+    networks:
+      - square-ui-network
+
+  square-ui-files-baseui:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3018:3000"
+    volumes:
+      - ./templates-baseui/files:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-files-baseui
+    networks:
+      - square-ui-network
+
+  square-ui-leads-baseui:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable pnpm && pnpm install --no-frozen-lockfile && TURBOPACK=0 pnpm dev"
+    ports:
+      - "3019:3000"
+    volumes:
+      - ./templates-baseui/leads:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - TURBOPACK=0
+    restart: "no"
+    container_name: square-ui-leads-baseui
     networks:
       - square-ui-network
 
