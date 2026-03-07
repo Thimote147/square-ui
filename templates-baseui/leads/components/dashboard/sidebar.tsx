@@ -228,13 +228,13 @@ export function DashboardSidebar({
             render={
               <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-accent transition-colors">
                 <Avatar className="size-7 sm:size-8">
-                  <AvatarImage src="https://api.dicebear.com/9.x/glass/svg?seed=john" />
+                  <AvatarImage src="https://api.dicebear.com/9.x/glass/svg?seed=LN" />
                   <AvatarFallback className="text-xs">JC</AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-xs sm:text-sm">John Cornor</p>
+                  <p className="font-semibold text-xs sm:text-sm">LN</p>
                   <p className="text-[10px] sm:text-xs text-muted-foreground truncate">
-                    Johncornor@mail.com
+                    leonelngoya@gmail.com
                   </p>
                 </div>
                 <HugeiconsIcon icon={ArrowDown01Icon} className="size-4 text-muted-foreground shrink-0" />
