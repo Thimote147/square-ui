@@ -48,8 +48,6 @@ next-env.d.ts
 coverage
 .nyc_output
 
-# Templates (not needed in the main site container)
-templates
 
 # Documentation
 README.md
