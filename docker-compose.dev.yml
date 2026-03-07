@@ -21,7 +21,7 @@ services:
 
   home:
     build:
-      context: ./home
+      context: .
       dockerfile: Dockerfile
       args:
         NODE_ENV: development
@@ -40,7 +40,7 @@ services:
   calendar:
     build:
       context: ./templates/calendar
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-calendar-dev
@@ -55,7 +55,7 @@ services:
   chat:
     build:
       context: ./templates/chat
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-chat-dev
@@ -70,7 +70,7 @@ services:
   emails:
     build:
       context: ./templates/emails
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-emails-dev
@@ -85,7 +85,7 @@ services:
   dashboard-1:
     build:
       context: ./templates/dashboard-1
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-1-dev
@@ -100,7 +100,7 @@ services:
   task-management:
     build:
       context: ./templates/task-management
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-task-management-dev
@@ -115,7 +115,7 @@ services:
   projects-timeline:
     build:
       context: ./templates/projects-timeline
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-projects-timeline-dev
@@ -130,7 +130,7 @@ services:
   dashboard-2:
     build:
       context: ./templates/dashboard-2
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-2-dev
@@ -145,7 +145,7 @@ services:
   dashboard-3:
     build:
       context: ./templates/dashboard-3
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-3-dev
@@ -160,7 +160,7 @@ services:
   dashboard-4:
     build:
       context: ./templates/dashboard-4
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-4-dev
@@ -175,7 +175,7 @@ services:
   employees:
     build:
       context: ./templates/employees
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-employees-dev
@@ -190,7 +190,7 @@ services:
   files:
     build:
       context: ./templates/files
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-files-dev
@@ -205,7 +205,7 @@ services:
   leads:
     build:
       context: ./templates/leads
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-leads-dev
@@ -220,7 +220,7 @@ services:
   payrolls:
     build:
       context: ./templates/payrolls
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-payrolls-dev
@@ -235,7 +235,7 @@ services:
   tasks:
     build:
       context: ./templates/tasks
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-tasks-dev
@@ -250,7 +250,7 @@ services:
   dashboard-3-baseui:
     build:
       context: ./templates-baseui/dashboard-3
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-3-baseui-dev
@@ -265,7 +265,7 @@ services:
   dashboard-4-baseui:
     build:
       context: ./templates-baseui/dashboard-4
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-dashboard-4-baseui-dev
@@ -280,7 +280,7 @@ services:
   emails-baseui:
     build:
       context: ./templates-baseui/emails
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-emails-baseui-dev
@@ -295,7 +295,7 @@ services:
   files-baseui:
     build:
       context: ./templates-baseui/files
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-files-baseui-dev
@@ -310,7 +310,7 @@ services:
   leads-baseui:
     build:
       context: ./templates-baseui/leads
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.template
       args:
         NODE_ENV: development
     container_name: square-ui-leads-baseui-dev
