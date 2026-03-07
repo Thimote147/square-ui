@@ -82,7 +82,11 @@ jobs:
 
           ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << EOF
           set -e
-          cd /app/square-ui
+          mkdir -p /home/thim/websites
+          if [ ! -d /home/thim/websites/square-ui/.git ]; then
+            git clone https://github.com/Thimote147/square-ui.git /home/thim/websites/square-ui
+          fi
+          cd /home/thim/websites/square-ui
           export DATABASE_URL="$DATABASE_URL"
           export NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL"
           git fetch origin dev
