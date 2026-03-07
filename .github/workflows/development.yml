@@ -9,8 +9,77 @@ on:
       - dev
 
 jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    strategy:
+      fail-fast: false
+      matrix:
+        template:
+          - bookmarks
+          - calendar
+          - chat
+          - dashboard-1
+          - dashboard-2
+          - dashboard-3
+          - dashboard-4
+          - dashboard-5
+          - emails
+          - employees
+          - files
+          - habit-tracker
+          - leads
+          - maps
+          - marketing-dashboard
+          - payrolls
+          - projects-timeline
+          - rentals
+          - task-management
+          - tasks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable pnpm
+        run: corepack enable pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: templates/${{ matrix.template }}
+
+      - name: Run linting
+        run: pnpm lint
+        working-directory: templates/${{ matrix.template }}
+        continue-on-error: true
+
+  comment-pr:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: lint-and-test
+
+    steps:
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = '${{ needs.lint-and-test.result }}';
+            const message = result === 'success'
+              ? '✅ All templates linted successfully!'
+              : '⚠️ Some templates have lint issues. Check the workflow logs for details.';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
   deploy:
-    needs: build-and-deploy
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
@@ -31,38 +100,18 @@ jobs:
           echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${DEPLOY_PORT:-22} "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
-          
-          ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << 'EOFDEV'
-            set -e
-            cd /app/square-ui
-            export DATABASE_URL="$DATABASE_URL"
-            export NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL"
-            git fetch origin dev
-            git reset --hard origin/dev
-            docker compose -f docker-compose.dev.yml pull --ignore-pull-failures || true
-            docker compose -f docker-compose.dev.yml up -d
-            docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
-          EOFDEV
 
-      - name: Database migration
-        env:
-          DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
-          DEPLOY_HOST: ${{ secrets.DEV_DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEV_DEPLOY_USER }}
-          DEPLOY_KEY: ${{ secrets.DEV_DEPLOY_KEY }}
-          DEPLOY_PORT: ${{ secrets.DEV_DEPLOY_PORT }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p ${DEPLOY_PORT:-22} "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
-          
-          ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << 'EOFMIG'
-            set -e
-            cd /app/square-ui
-            export DATABASE_URL="$DATABASE_URL"
-            docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
-          EOFMIG
+          ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} "$DEPLOY_USER@$DEPLOY_HOST" << EOF
+          set -e
+          cd /app/square-ui
+          export DATABASE_URL="$DATABASE_URL"
+          export NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL"
+          git fetch origin dev
+          git reset --hard origin/dev
+          docker compose -f docker-compose.dev.yml pull --ignore-pull-failures || true
+          docker compose -f docker-compose.dev.yml up -d
+          docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
+          EOF
 
       - name: Notify deployment status
         if: always()
@@ -70,50 +119,7 @@ jobs:
         with:
           script: |
             const status = '${{ job.status }}';
-            const message = status === 'success' 
-              ? '✅ Development deployment successful!' 
+            const message = status === 'success'
+              ? '✅ Development deployment successful!'
               : '❌ Development deployment failed!';
             console.log(message);
-
-  lint-and-test:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Enable pnpm
-        run: corepack enable pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: templates/dashboard-1
-
-      - name: Run linting
-        run: pnpm lint
-        working-directory: templates/dashboard-1
-        continue-on-error: true
-
-      - name: Run tests
-        run: |
-          echo "Running tests"
-          # Add your test commands here
-        continue-on-error: true
-
-      - name: Comment PR
-        if: always()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ Development build completed successfully! All images built and ready for deployment.'
-            })
