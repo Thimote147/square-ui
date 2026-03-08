@@ -40,10 +40,9 @@ services:
   calendar:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/calendar
-        NODE_ENV: development
     container_name: square-ui-calendar-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -56,10 +55,9 @@ services:
   chat:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/chat
-        NODE_ENV: development
     container_name: square-ui-chat-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -72,10 +70,9 @@ services:
   emails:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/emails
-        NODE_ENV: development
     container_name: square-ui-emails-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -88,10 +85,9 @@ services:
   dashboard-1:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/dashboard-1
-        NODE_ENV: development
     container_name: square-ui-dashboard-1-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -104,10 +100,9 @@ services:
   task-management:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/task-management
-        NODE_ENV: development
     container_name: square-ui-task-management-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -120,10 +115,9 @@ services:
   projects-timeline:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/projects-timeline
-        NODE_ENV: development
     container_name: square-ui-projects-timeline-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -136,10 +130,9 @@ services:
   dashboard-2:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/dashboard-2
-        NODE_ENV: development
     container_name: square-ui-dashboard-2-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -152,10 +145,9 @@ services:
   dashboard-3:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/dashboard-3
-        NODE_ENV: development
     container_name: square-ui-dashboard-3-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -168,10 +160,9 @@ services:
   dashboard-4:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/dashboard-4
-        NODE_ENV: development
     container_name: square-ui-dashboard-4-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -184,10 +175,9 @@ services:
   employees:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/employees
-        NODE_ENV: development
     container_name: square-ui-employees-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -200,10 +190,9 @@ services:
   files:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/files
-        NODE_ENV: development
     container_name: square-ui-files-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -216,10 +205,9 @@ services:
   leads:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/leads
-        NODE_ENV: development
     container_name: square-ui-leads-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -232,10 +220,9 @@ services:
   payrolls:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/payrolls
-        NODE_ENV: development
     container_name: square-ui-payrolls-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -248,10 +235,9 @@ services:
   tasks:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates/tasks
-        NODE_ENV: development
     container_name: square-ui-tasks-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -261,13 +247,102 @@ services:
       - "3014:3000"
     restart: unless-stopped
 
+  bookmarks:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/bookmarks
+    container_name: square-ui-bookmarks-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3020:3000"
+    restart: unless-stopped
+
+  dashboard-5:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/dashboard-5
+    container_name: square-ui-dashboard-5-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3021:3000"
+    restart: unless-stopped
+
+  habit-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/habit-tracker
+    container_name: square-ui-habit-tracker-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3022:3000"
+    restart: unless-stopped
+
+  maps:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/maps
+    container_name: square-ui-maps-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3023:3000"
+    restart: unless-stopped
+
+  marketing-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/marketing-dashboard
+    container_name: square-ui-marketing-dashboard-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3024:3000"
+    restart: unless-stopped
+
+  rentals:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates/rentals
+    container_name: square-ui-rentals-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3025:3000"
+    restart: unless-stopped
+
   dashboard-3-baseui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates-baseui/dashboard-3
-        NODE_ENV: development
     container_name: square-ui-dashboard-3-baseui-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -280,10 +355,9 @@ services:
   dashboard-4-baseui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates-baseui/dashboard-4
-        NODE_ENV: development
     container_name: square-ui-dashboard-4-baseui-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -296,10 +370,9 @@ services:
   emails-baseui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates-baseui/emails
-        NODE_ENV: development
     container_name: square-ui-emails-baseui-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -312,10 +385,9 @@ services:
   files-baseui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates-baseui/files
-        NODE_ENV: development
     container_name: square-ui-files-baseui-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -328,10 +400,9 @@ services:
   leads-baseui:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile.template.dev
       args:
         TEMPLATE_PATH: templates-baseui/leads
-        NODE_ENV: development
     container_name: square-ui-leads-baseui-dev
     environment:
       DATABASE_URL: ${DATABASE_URL}
@@ -339,6 +410,111 @@ services:
       NODE_ENV: development
     ports:
       - "3019:3000"
+    restart: unless-stopped
+
+  bookmarks-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/bookmarks
+    container_name: square-ui-bookmarks-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3026:3000"
+    restart: unless-stopped
+
+  calendar-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/calendar
+    container_name: square-ui-calendar-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3027:3000"
+    restart: unless-stopped
+
+  dashboard-5-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/dashboard-5
+    container_name: square-ui-dashboard-5-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3028:3000"
+    restart: unless-stopped
+
+  habit-tracker-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/habit-tracker
+    container_name: square-ui-habit-tracker-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3029:3000"
+    restart: unless-stopped
+
+  maps-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/maps
+    container_name: square-ui-maps-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3030:3000"
+    restart: unless-stopped
+
+  marketing-dashboard-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/marketing-dashboard
+    container_name: square-ui-marketing-dashboard-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3031:3000"
+    restart: unless-stopped
+
+  rentals-baseui:
+    build:
+      context: .
+      dockerfile: Dockerfile.template.dev
+      args:
+        TEMPLATE_PATH: templates-baseui/rentals
+    container_name: square-ui-rentals-baseui-dev
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: development
+    ports:
+      - "3032:3000"
     restart: unless-stopped
 
 volumes:

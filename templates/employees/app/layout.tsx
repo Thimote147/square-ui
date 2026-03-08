@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Square UI - Employees",
   description: "A modern employee management interface built with Next.js and shadcn/ui",

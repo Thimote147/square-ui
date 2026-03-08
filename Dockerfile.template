@@ -14,8 +14,7 @@ RUN corepack enable pnpm
 ARG TEMPLATE_PATH
 COPY --from=deps /app/node_modules ./node_modules
 COPY ${TEMPLATE_PATH}/ ./
-ARG NODE_ENV=production
-ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV=production
 RUN pnpm build
 
 FROM base AS runner

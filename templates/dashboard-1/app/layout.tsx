@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Square UI - Dashboard",
   description: "A modern dashboard interface built with Next.js and shadcn/ui",

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Square AI - Chat Interface",
   description: "A modern AI chat interface built with Next.js and shadcn/ui",

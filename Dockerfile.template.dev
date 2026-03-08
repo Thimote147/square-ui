@@ -1,0 +1,17 @@
+FROM node:20-alpine
+
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+RUN corepack enable pnpm
+
+ARG TEMPLATE_PATH
+COPY ${TEMPLATE_PATH}/package.json ${TEMPLATE_PATH}/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY ${TEMPLATE_PATH}/ ./
+
+ENV NODE_ENV=development
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+CMD ["pnpm", "dev"]
