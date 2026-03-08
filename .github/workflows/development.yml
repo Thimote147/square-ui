@@ -91,8 +91,8 @@ jobs:
           export NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL"
           git fetch origin dev
           git reset --hard origin/dev
-          for service in $(docker compose -f docker-compose.dev.yml config --services); do
-            docker compose -f docker-compose.dev.yml build "$service"
+          for service in \$(docker compose -f docker-compose.dev.yml config --services); do
+            docker compose -f docker-compose.dev.yml build "\$service"
           done
           docker compose -f docker-compose.dev.yml up -d
           docker compose -f docker-compose.dev.yml exec -T home pnpm prisma migrate deploy || true
