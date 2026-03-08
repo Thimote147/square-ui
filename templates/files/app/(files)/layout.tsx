@@ -2,6 +2,8 @@ import { FilesSidebar } from "@/components/files/sidebar";
 import { FilesHeader } from "@/components/files/header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
+export const dynamic = 'force-dynamic';
+
 export default function FilesLayout({
   children,
 }: {
